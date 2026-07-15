@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>あなたの細胞、実はほぼキャベツです。— 人体再起動計画 —</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+        body {
+            background-color: #06130b;
+            color: #e6f4ea;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            overflow-x: hidden;
+        }
+        .jelly-text {
+            display: inline-block;
+            cursor: pointer;
+        }
+        /* スクロールバーのカスタム */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #06130b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #15803d;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-between pb-12">
+
+    <main class="w-full max-w-4xl px-4 py-16 flex-grow flex flex-col items-center justify-center">
+        
+        <h1 class="text-4xl md:text-6xl font-extrabold text-center tracking-wider text-green-400 mb-6 leading-tight select-none">
+            <span class="jelly-text">【閲覧注意】</span><br class="md:hidden">
+            <span class="jelly-text">あなたの細胞、</span><br>
+            <span class="jelly-text">実はほぼキャベツです。</span><br>
+            <span class="text-xl md:text-2xl text-green-500 block mt-4 border-b border-green-800 pb-4 font-mono">
+                — 人体の99%は食べた野菜で再起動する —
+            </span>
+        </h1>
+
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full my-16">
+            <div class="veggie-card bg-emerald-950/40 border border-green-500/30 rounded-2xl p-6 transform transition-all hover:border-green-400 backdrop-blur-sm cursor-pointer shadow-lg shadow-green-900/20">
+                <div class="text-5xl mb-4 text-center">🥬</div>
+                <h3 class="text-2xl font-bold text-green-300 text-center mb-2">脳を支配するキャベツ</h3>
+                <p class="text-sm text-green-100/70 leading-relaxed">あなたの昨日の思考、それ実はキャベツの水分と栄養素が電気信号を伝達した結果です。思考の源流は畑にある。</p>
+            </div>
+            <div class="veggie-card bg-emerald-950/40 border border-green-500/30 rounded-2xl p-6 transform transition-all hover:border-green-400 backdrop-blur-sm cursor-pointer shadow-lg shadow-green-900/20">
+                <div class="text-5xl mb-4 text-center">🥗</div>
+                <h3 class="text-2xl font-bold text-green-300 text-center mb-2">血液を巡るレタス</h3>
+                <p class="text-sm text-green-100/70 leading-relaxed">脈打つ鼓動、駆け巡る赤血球。その精緻な循環システムを支える水分は、極上のレタスから抽出された神秘の血肉。</p>
+            </div>
+            <div class="veggie-card bg-emerald-950/40 border border-green-500/30 rounded-2xl p-6 transform transition-all hover:border-green-400 backdrop-blur-sm cursor-pointer shadow-lg shadow-green-900/20">
+                <div class="text-5xl mb-4 text-center">🌱</div>
+                <h3 class="text-2xl font-bold text-green-300 text-center mb-2">遺伝子を紡ぐオクラ</h3>
+                <p class="text-sm text-green-100/70 leading-relaxed">あの独特のネバネバこそが、あなたの細胞膜を保護し、明日のあなたを強固に形作るナノテクノロジーそのもの。</p>
+            </div>
+        </section>
+
+        <section class="w-full max-w-xl bg-emerald-950/20 border border-green-900 rounded-2xl p-6 md:p-8 backdrop-blur-md">
+            <h2 class="text-xl font-bold text-green-400 mb-6 flex items-center justify-center gap-2">
+                <span>💬</span> 遺伝子（コメント）を刻み込む
+            </h2>
+            <form id="commentForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-mono uppercase tracking-wider text-green-500 mb-1">Name</label>
+                    <input type="text" id="username" required placeholder="匿名キャベツ人間" 
+                        class="w-full bg-black/40 border border-green-800 rounded-lg px-4 py-2.5 text-green-200 placeholder-green-800 focus:outline-none focus:border-green-400 transition-colors">
+                </div>
+                <div>
+                    <label class="block text-xs font-mono uppercase tracking-wider text-green-500 mb-1">Message</label>
+                    <textarea id="commentText" required rows="3" placeholder="今日食べた野菜が、明日の私の右腕になる..." 
+                        class="w-full bg-black/40 border border-green-800 rounded-lg px-4 py-2.5 text-green-200 placeholder-green-800 focus:outline-none focus:border-green-400 transition-colors resize-none"></textarea>
+                </div>
+                <button type="submit" 
+                    class="w-full bg-green-600 hover:bg-green-500 text-black font-extrabold py-3 px-4 rounded-lg transition-all transform active:scale-95 shadow-md shadow-green-600/20">
+                    細胞に送信する
+                </button>
+            </form>
+        </section>
+
+        <section class="w-full max-w-xl mt-12">
+            <h2 class="text-xs font-mono uppercase tracking-wider text-green-500 mb-4 px-2">最新の細胞ログ</h2>
+            <div id="commentsWrapper" class="space-y-4">
+                <div class="text-center text-green-700 py-8 text-sm animate-pulse">同期中...</div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-xs font-mono text-green-700 text-center mt-8">
+        &copy; 2026 HUMAN IS VEGETABLE PROJECT.
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        // Firebase設定（ここに自分のconfigを貼る）
+        const firebaseConfig = {
+  apiKey: "AIzaSyCGfRj8_YDcJZK2eGCgs_DTlZxTjx1EEE8",
+  authDomain: "sancyoku-8966a.firebaseapp.com",
+  projectId: "sancyoku-8966a",
+  storageBucket: "sancyoku-8966a.firebasestorage.app",
+  messagingSenderId: "233488044593",
+  appId: "1:233488044593:web:f3b777ad889933cb1b7b10"
+};
+
+        // Firebase初期化
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // 要素の取得
+        const commentForm = document.getElementById('commentForm');
+        const usernameInput = document.getElementById('username');
+        const commentTextInput = document.getElementById('commentText');
+        const commentsWrapper = document.getElementById('commentsWrapper');
+
+        // コメント一覧を取得してレンダリングする関数
+        async function fetchComments() {
+            try {
+                // getDocs + orderBy("createdAt", "desc") で新しい順に取得
+                const q = query(collection(db, "comments"), orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(q);
+                
+                commentsWrapper.innerHTML = '';
+
+                if (querySnapshot.empty) {
+                    commentsWrapper.innerHTML = '<p class="text-center text-green-700 py-4 text-sm">まだ細胞ログはありません。</p>';
+                    return;
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    
+                    // 外側の器を作成
+                    const card = document.createElement('div');
+                    card.className = 'bg-green-950/10 border border-green-900/50 rounded-xl p-4 transition-all duration-300 hover:bg-green-950/20';
+
+                    // ヘッダー情報（ユーザー名）
+                    const header = document.createElement('div');
+                    header.className = 'flex justify-between items-center mb-1';
+                    
+                    const nameSpan = document.createElement('span');
+                    nameSpan.className = 'text-green-400 font-bold text-sm';
+                    // セキュリティ対策: textContentを使用
+                    nameSpan.textContent = data.name || '匿名キャベツ人間';
+
+                    // 投稿日時
+                    const timeSpan = document.createElement('span');
+                    timeSpan.className = 'text-[10px] font-mono text-green-600';
+                    if (data.createdAt) {
+                        const date = data.createdAt.toDate();
+                        timeSpan.textContent = `${date.getMonth()+1}/${date.getDate()} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+                    }
+
+                    header.appendChild(nameSpan);
+                    header.appendChild(timeSpan);
+
+                    // 本文
+                    const content = document.createElement('p');
+                    content.className = 'text-green-100 text-sm whitespace-pre-wrap leading-relaxed mt-1';
+                    // セキュリティ対策: textContentを使用
+                    content.textContent = data.text;
+
+                    card.appendChild(header);
+                    card.appendChild(content);
+                    commentsWrapper.appendChild(card);
+                });
+
+            } catch (error) {
+                console.error("Error fetching comments: ", error);
+                commentsWrapper.innerHTML = '<p class="text-red-400 text-center py-4 text-sm">データの読み込みに失敗しました。</p>';
+            }
+        }
+
+        // コメント送信処理
+        commentForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const name = usernameInput.value.trim();
+            const text = commentTextInput.value.trim();
+
+            if (!name || !text) return;
+
+            try {
+                // addDoc で保存
+                await addDoc(collection(db, "comments"), {
+                    name: name,
+                    text: text,
+                    createdAt: new Date() // JSのDateオブジェクト（Firestore側でTimestampに自動変換されます）
+                });
+
+                // フォームをクリアして再読み込み
+                commentTextInput.value = '';
+                await fetchComments();
+
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                alert("送信に失敗しました。configが正しく設定されているか確認してください。");
+            }
+        });
+
+        // 初期読み込み
+        fetchComments();
+
+        /* ==========================================
+           かっこいい動き（びろーんアニメーション）の仕掛け
+           ========================================== */
+        
+        // 1. タイトル文字の「びろーん」ホバーエフェクト
+        const textElements = document.querySelectorAll('.jelly-text');
+        textElements.forEach(el => {
+            // 文字を1文字ずつ分割して包む（びろーん度を高めるため）
+            const chars = el.textContent.split("");
+            el.innerHTML = "";
+            chars.forEach(char => {
+                const span = document.createElement('span');
+                span.textContent = char;
+                span.style.display = 'inline-block';
+                span.className = 'char-jelly';
+                el.appendChild(span);
+            });
+        });
+
+        // 分割した文字に対してマウスが入ったときの弾力アニメーション
+        document.querySelectorAll('.char-jelly').forEach(char => {
+            char.addEventListener('mouseenter', () => {
+                gsap.to(char, {
+                    scaleX: 1.4,
+                    scaleY: 0.6,
+                    duration: 0.1,
+                    ease: "power1.out",
+                    onComplete: () => {
+                        // びろーんと戻る動き
+                        gsap.to(char, {
+                            scaleX: 1,
+                            scaleY: 1,
+                            duration: 0.6,
+                            ease: "elastic.out(1.2, 0.3)"
+                        });
+                    }
+                });
+            });
+        });
+
+        // 2. 野菜カードの「びろーん」ホバーエフェクト
+        document.querySelectorAll('.veggie-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                gsap.to(card, {
+                    scaleX: 1.05,
+                    scaleY: 0.95,
+                    y: -8,
+                    duration: 0.15,
+                    ease: "sine.out",
+                    onComplete: () => {
+                        gsap.to(card, {
+                            scaleX: 1,
+                            scaleY: 1,
+                            duration: 0.8,
+                            ease: "elastic.out(1, 0.3)"
+                        });
+                    }
+                });
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, {
+                    y: 0,
+                    scaleX: 1,
+                    scaleY: 1,
+                    duration: 0.5,
+                    ease: "elastic.out(1, 0.5)"
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>
